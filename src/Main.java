@@ -1,5 +1,8 @@
+import entidades.Paciente;
+
 import java.util.List;
 import java.util.Scanner;
+import repositorio.repositorio;
 
 public class Main {
     private static Scanner input = new Scanner(System.in);
@@ -52,14 +55,14 @@ public class Main {
     private static void registrarAtividadeFisica() {
         System.out.println("Digite o ID do paciente que deseja registrar atividade física: ");
         int id = input.nextInt();
-        Paciente paciente = Paciente.buscarPaciente(id);
+        Paciente paciente = repositorio.buscarPaciente(id);
         if (paciente != null) {
             System.out.println("Digite a atividade física que deseja registrar: ");
             String atividade = input.next();
             paciente.setAtividadesFisicas(atividade);
             System.out.println("Atividade física registrada com sucesso!");
         } else {
-            System.out.println("Paciente não encontrado.");
+            System.out.println("entidades.Paciente não encontrado.");
         }
 
     }
@@ -67,18 +70,18 @@ public class Main {
     private static void informacoesPaciente() {
         System.out.println("Digite o ID do paciente que deseja ver as informações: ");
         int id = input.nextInt();
-        Paciente paciente = Paciente.buscarPaciente(id);
+        Paciente paciente = repositorio.buscarPaciente(id);
         if (paciente != null) {
             System.out.println(paciente.stringPaciente());
         } else {
-            System.out.println("Paciente não encontrado.");
+            System.out.println("entidades.Paciente não encontrado.");
         }
     }
 
     private static void editarPaciente() {
         System.out.println("Digite o ID do paciente que deseja editar: ");
         int id = input.nextInt();
-        Paciente paciente = Paciente.buscarPaciente(id);
+        Paciente paciente = repositorio.buscarPaciente(id);
         if (paciente != null) {
             System.out.println("Digite o novo nome: ");
             paciente.setNome(input.next());
@@ -94,16 +97,16 @@ public class Main {
             paciente.setFrequenciaCardiaca(input.nextDouble());
             System.out.println("Digite a nova dieta alimentar: ");
             paciente.setDietaAlimentar(input.next());
-            Paciente.alterar(id, paciente);
-            System.out.println("Paciente editado com sucesso!");
+            repositorio.alterar(id, paciente);
+            System.out.println("entidades.Paciente editado com sucesso!");
         } else {
-            System.out.println("Paciente não encontrado.");
+            System.out.println("entidades.Paciente não encontrado.");
         }
     }
 
     private static void listarPacientes() {
         System.out.println("**Lista de Pacientes**");
-        List<Paciente> pacientes = Paciente.listar();
+        List<Paciente> pacientes = repositorio.listar();
 
         if (!pacientes.isEmpty()) {
             for (int i = 0; i < pacientes.size(); i++) {
@@ -116,7 +119,7 @@ public class Main {
     }
 
     private static void cadastrarPaciente() {
-        System.out.println("**Cadastro de Novo Paciente**");
+        System.out.println("**Cadastro de Novo entidades.Paciente**");
         Paciente paciente = new Paciente();
         System.out.println("Nome: ");
         paciente.setNome(input.next());
@@ -132,14 +135,14 @@ public class Main {
         paciente.setFrequenciaCardiaca(input.nextDouble());
         System.out.println("Dieta alimentar: ");
         paciente.setDietaAlimentar(input.next());
-        Paciente.adcionarPaciente(paciente);
-        System.out.println("Paciente " + paciente + "cadastrado com sucesso!");
+        repositorio.adcionarPaciente(paciente);
+        System.out.println("entidades.Paciente " + paciente + "cadastrado com sucesso!");
     }
 
     private static void removerPaciente() {
         System.out.println("Digite o id do paciente que deseja remover:");
         int idRemover = input.nextInt();
-        Paciente.removerPaciente(idRemover);
-        System.out.println("Paciente removido com sucesso!");
+        repositorio.removerPaciente(idRemover);
+        System.out.println("entidades.Paciente removido com sucesso!");
     }
 }
